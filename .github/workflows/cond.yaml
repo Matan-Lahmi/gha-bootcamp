@@ -17,3 +17,8 @@ jobs:
       - id: info 
         run: echo " env-name=${{ matrix.env}}" >> $GITHUB_OUTPUT
       
+  job-b:
+    needs: job-a
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "The winner is ${{ needs.job-a.outputs.env-print}}"
