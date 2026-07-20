@@ -1,15 +1,23 @@
 name: task3
 
 on:
-  workflow_dispatch:
-    inputs:
-      env:
-        description: "select what env to test"
-        required: true
-        default: 'dev' 
+  push:
+    branches:
+      - main
 
 jobs:
   job-a:
+    strategy:
+      matrix:
+        env: ["prod","dev","staging"]
     runs-on: ubuntu-latest
     steps:
-      - run: echo "The user set the test on ${{ github.event.inputs.env }}"
+      - run: echo "Deploying to ${{ matrix.env}}"
+
+  job-b:
+    needs: job-a
+    if: seccess()
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "All environments deployed successfully"
+
