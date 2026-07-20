@@ -1,15 +1,20 @@
-name: hello-workflow
+name: outputs-demo
 
 on:
-    push:
-        branches: [main]
+  push:
+    branches: [main]
 
 jobs:
-    job-a:
-        runs-on: ubuntu-latest
-        steps:
-            - name: job a
-              run: echo "job A running"
-            - name: job b
-              run: echo "Job B running"
+  job-a:
+    runs-on: ubuntu-latest
+    outputs:
+      my-message: ${{ steps.set-message.outputs.message }}
+    steps:
+      - id: set-message
+        run: echo "message=Hello from Job A" >> $GITHUB_OUTPUT
 
+  job-b:
+    needs: job-a
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Job B received: ${{ needs.job-a.outputs.my-message }}"
