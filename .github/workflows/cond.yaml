@@ -1,4 +1,4 @@
-name: task1
+name: task3
 
 on:
   push:
@@ -7,19 +7,13 @@ on:
 
 jobs:
   job-a:
+    strategy:
+      matrix:
+        env: ["dev","staging","prod"]
     runs-on: ubuntu-latest
+    outputs:
+      env-print: ${{ steps.info.outputs.env-name}}
     steps:
-      - run: exit 1
-
-  job-b:
-    needs: job-a 
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "All good"
-
-  job-c:
-    needs: job-a
-    if: failure()
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Something broke"
+      - id: info 
+        run: echo " env-name=${{ matrix.env}}" >> $GITHUB_OUTPUT
+      
