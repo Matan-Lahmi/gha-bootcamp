@@ -10,4 +10,6 @@ jobs:
         steps:
             - name: print-hello
               run: echo "Hellow from GHA"
+            - name: print-date
+              run: echo "20/7/2026"
 
