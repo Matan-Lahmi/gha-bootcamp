@@ -9,19 +9,16 @@ on:
 
 jobs:
   job-a:
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
-      - run: exit 1
+      - run: echo "Trigger manually!"
+    
 
   job-b:
     needs: job-a
-    if: failure()
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Job A failed!"
+      - run: echo "Trigger by push!"
   
-  job-c:
-    needs: job-a
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "run only if job-a is done"
