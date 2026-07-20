@@ -1,24 +1,21 @@
-name: example-2
+name: task-1
 
 on:
   push:
     branches:
       - main
-    
+
 jobs:
   job-a:
     runs-on: ubuntu-latest
     outputs:
-      first-name: ${{ steps.info.outputs.name}}
-      user-role: ${{ steps.info.outputs.role }}
+      sum: ${{ steps.num.info.sum}}
     steps:
       - id: info 
-        run: |
-          echo "name=Matan" >> $GITHUB_OUTPUT
-          echo "role=DEVOPS" >> $GITHUB_OUTPUT
+        run: echo "sum=10" >> $GITHUB_OUTPUT
 
   job-b:
     needs: job-a
     runs-on: ubuntu-latest
     steps:
-      - run: echo "name :${{ needs.job-a.outputs.first-name }}, Role :${{ needs.job-a.outputs.user-role }}"
+      - run: echo "The sum in ${{ needs.job-a.outputs.sum}}"
