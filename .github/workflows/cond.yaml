@@ -16,7 +16,6 @@ jobs:
     
 
   job-b:
-    needs: job-a
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
