@@ -10,6 +10,9 @@ jobs:
         steps:
             - name: print-hello
               run: echo "Hellow from GHA"
+    date:
+        runs-on: ubuntu-latest
+        steps:
             - name: print-date
               run: echo "20/7/2026"
 
