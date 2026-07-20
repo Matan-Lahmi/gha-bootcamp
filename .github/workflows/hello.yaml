@@ -1,4 +1,4 @@
-name: task-1
+name: task-2
 
 on:
   push:
@@ -8,14 +8,18 @@ on:
 jobs:
   job-a:
     runs-on: ubuntu-latest
-    outputs:
-      sum: ${{ steps.num.outputs.sum}}
     steps:
-      - id: num 
-        run: echo "sum=10" >> $GITHUB_OUTPUT
-
+      - run: echo "This is job-a"
+  
   job-b:
     needs: job-a
     runs-on: ubuntu-latest
     steps:
-      - run: echo "The sum is :${{ needs.job-a.outputs.sum }}"
+      - run: echo "This is job-b"
+
+  job-c:
+    needs: job-b
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This is job-c"
+
