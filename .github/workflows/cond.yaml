@@ -1,24 +1,15 @@
 name: task3
 
 on:
-  push:
-    branches:
-      - main 
+  workflow_dispatch:
+    inputs:
+      env:
+        description: "select what env to test"
+        required: true
+        default: 'dev' 
 
 jobs:
   job-a:
-    strategy:
-      matrix:
-        env: ["dev","staging","prod"]
-    runs-on: ubuntu-latest
-    outputs:
-      env-print: ${{ steps.info.outputs.env-name}}
-    steps:
-      - id: info 
-        run: echo "env-name=${{ matrix.env}}" >> $GITHUB_OUTPUT
-      
-  job-b:
-    needs: job-a
     runs-on: ubuntu-latest
     steps:
-      - run: echo "The winner is ${{ needs.job-a.outputs.env-print }}"
+      - run: echo "The user set the test on ${{ github.event.inputs.env }}"
