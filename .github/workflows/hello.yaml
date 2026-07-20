@@ -12,13 +12,12 @@ jobs:
       - run: echo "This is job-a"
   
   job-b:
-    needs: job-a
     runs-on: ubuntu-latest
     steps:
       - run: echo "This is job-b"
 
   job-c:
-    needs: job-b
+    needs: [job-b, job-a]
     runs-on: ubuntu-latest
     steps:
       - run: echo "This is job-c"
