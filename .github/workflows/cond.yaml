@@ -12,8 +12,14 @@ jobs:
       - run: exit 1
 
   job-b:
-    needs: job-a
-    if: always() 
+    needs: job-a 
     runs-on: ubuntu-latest
     steps:
-      - run: echo "This always runs"
+      - run: echo "All good"
+
+  job-c:
+    needs: job-a
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Something broke"
