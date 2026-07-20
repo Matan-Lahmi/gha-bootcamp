@@ -17,4 +17,4 @@ jobs:
     needs: job-a
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Job B received: ${{ needs.job-a.outputs.my-message }}"
+      - run: echo "Job B received:" "${{ needs.job-a.outputs.my-message }}"
