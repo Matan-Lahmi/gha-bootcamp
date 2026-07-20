@@ -1,0 +1,25 @@
+name: task 
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  job-a:
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 1
+
+  job-b:
+    needs: job-a
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Job A failed!"
+  
+  job-c:
+    needs: job-a
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "run only if job-a is done"
