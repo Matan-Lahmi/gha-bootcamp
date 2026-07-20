@@ -21,4 +21,4 @@ jobs:
     needs: job-a
     runs-on: ubuntu-latest
     steps:
-      - run: echo "name - ${{ needs.job-a.outputs.first-name }}, Role - ${{ needs.job-a.outputs.user-role }}"
+      - run: echo "name:${{ needs.job-a.outputs.first-name }}, Role:${{ needs.job-a.outputs.user-role }}"
