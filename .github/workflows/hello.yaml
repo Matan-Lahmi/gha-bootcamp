@@ -9,9 +9,9 @@ jobs:
   job-a:
     runs-on: ubuntu-latest
     outputs:
-      sum: ${{ steps.num.info.sum}}
+      sum: ${{ steps.num.outputs.sum}}
     steps:
-      - id: info 
+      - id: num 
         run: echo "sum=10" >> $GITHUB_OUTPUT
 
   job-b:
