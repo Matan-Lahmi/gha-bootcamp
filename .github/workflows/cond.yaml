@@ -16,7 +16,7 @@ jobs:
 
   job-b:
     needs: job-a
-    if: seccess()
+    if: success()
     runs-on: ubuntu-latest
     steps:
       - run: echo "All environments deployed successfully"
