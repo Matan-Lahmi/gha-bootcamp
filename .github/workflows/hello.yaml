@@ -1,4 +1,4 @@
-name: task-4
+name: task-5
 
 on:
   push:
@@ -7,24 +7,9 @@ on:
 
 jobs:
   job-a:
-    runs-on: ubuntu-latest
-    outputs:
-      greeting: ${{ steps.info.outputs.greeting}}
-    steps:
-      - id: info 
-        run: echo "greeting=Hello" >> $GITHUB_OUTPUT
-    
-  job-b:
-    needs: job-a
-    runs-on: ubuntu-latest
-    outputs:
-      full-greeting: ${{ steps.info.outputs.full-greeting}}
-    steps:
-      - id: info
-        run: echo "full-greeting=${{ needs.job-a.outputs.greeting}} World" >> $GITHUB_OUTPUT
-
-  job-c:
-    needs: job-b
+    strategy:
+      matrix:
+        env: [dev,staging,prod]
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{ needs.job-b.outputs.full-greeting}}"
+      - run: echo "Running on ${{ matrix.env}}
