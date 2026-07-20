@@ -21,4 +21,4 @@ jobs:
     needs: job-a
     runs-on: ubuntu-latest
     steps:
-      - run: echo "The winner is ${{ needs.job-a.outputs.env-print}}"
+      - run: echo "The winner is ${{ needs.job-a.outputs.env-print }}"
