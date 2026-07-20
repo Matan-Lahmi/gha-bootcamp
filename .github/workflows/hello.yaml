@@ -12,4 +12,4 @@ jobs:
         env: [dev,staging,prod]
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Running on ${{ matrix.env}}
+      - run: echo "Running on ${{ matrix.env }}"
