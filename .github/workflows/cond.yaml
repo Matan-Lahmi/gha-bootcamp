@@ -1,23 +1,19 @@
-name: task 
+name: task1
 
 on:
   push:
     branches:
-      - main
-  workflow_dispatch:
-    
+      - main 
 
 jobs:
   job-a:
-    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Trigger manually!"
-    
+      - run: exit 1
 
   job-b:
-    if: github.event_name == 'push'
+    needs: job-a
+    if: always() 
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Trigger by push!"
-  
+      - run: echo "This always runs"
