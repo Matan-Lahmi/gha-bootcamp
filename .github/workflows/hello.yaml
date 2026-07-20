@@ -1,23 +1,24 @@
-name: example-1
+name: example-2
 
 on:
   push:
-    branches: [main]
-
-
+    branches:
+      - main
+    
 jobs:
   job-a:
     runs-on: ubuntu-latest
     outputs:
-      country: ${{ steps.pick-city.outputs.country}}
-      city: ${{ steps.pick-city.outputs.city-name }}
+      first-name: ${{ steps.info.outputs.name}}
+      user-role: ${{ steps.info.outputs.role }}
     steps:
-      - id: pick-city 
-        run: echo "city-name=Tel Aviv" >> $GITHUB_OUTPUT | echo "country=Israel" >> $GITHUB_OUTPUT
+      - id: info 
+        run: |
+          echo "name=Matan" >> $GITHUB_OUTPUT
+          echo "role=DEVOPS" >> $GITHUB_OUTPUT
 
   job-b:
     needs: job-a
     runs-on: ubuntu-latest
     steps:
-      - run: echo "The city is ${{ needs.job-a.outputs.city}}, locate in ${{ needs.job-a.outputs.country }}"
-
+      - run: echo "Name: ${{ needs.job-a.outputs.first-name }}, Role: ${{ needs.job-a.outputs.user-role }}"
