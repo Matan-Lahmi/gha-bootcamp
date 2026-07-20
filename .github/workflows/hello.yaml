@@ -1,20 +1,22 @@
-name: outputs-demo
+name: example-1
 
 on:
   push:
     branches: [main]
 
+
 jobs:
   job-a:
     runs-on: ubuntu-latest
     outputs:
-      my-message: ${{ steps.set-message.outputs.message }}
+      city: ${{ steps.pick-city.outputs.city-name }}
     steps:
-      - id: set-message
-        run: echo "message=Hello from Job A" >> $GITHUB_OUTPUT
+      - id: pick-city 
+        run: echo "city-name=Tel Aviv" >> $GITHUB_OUTPUT
 
   job-b:
     needs: job-a
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Job B received:" "${{ needs.job-a.outputs.my-message }}"
+      - run: echo "The city is ${{ need.job-a.outputs.city}}"
+
