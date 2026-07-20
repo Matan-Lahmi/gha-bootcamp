@@ -18,4 +18,4 @@ jobs:
     needs: job-a
     runs-on: ubuntu-latest
     steps:
-      - run: echo "The sum in ${{ needs.job-a.outputs.sum}}"
+      - run: echo "The sum is :${{ needs.job-a.outputs.sum }}"
