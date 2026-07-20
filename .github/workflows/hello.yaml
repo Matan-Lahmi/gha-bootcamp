@@ -8,9 +8,8 @@ jobs:
     job-a:
         runs-on: ubuntu-latest
         steps:
-            - run: echo "job A running"
-    job-b:
-        runs-on: ubuntu-latest
-        steps:
-            - run: echo "Job B running"
+            - name: job a
+              run: echo "job A running"
+            - name: job b
+              run: echo "Job B running"
 
