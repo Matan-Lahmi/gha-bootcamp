@@ -15,7 +15,7 @@ jobs:
       env-print: ${{ steps.info.outputs.env-name}}
     steps:
       - id: info 
-        run: echo " env-name=${{ matrix.env}}" >> $GITHUB_OUTPUT
+        run: echo "env-name=${{ matrix.env}}" >> $GITHUB_OUTPUT
       
   job-b:
     needs: job-a
