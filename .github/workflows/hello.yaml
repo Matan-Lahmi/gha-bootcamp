@@ -9,13 +9,11 @@ jobs:
   job-a:
     runs-on: ubuntu-latest
     outputs:
-      country: ${{ steps.pick-country.outputs.country}}
+      country: ${{ steps.pick-city.outputs.country}}
       city: ${{ steps.pick-city.outputs.city-name }}
     steps:
       - id: pick-city 
-        run: echo "city-name=Tel Aviv" >> $GITHUB_OUTPUT
-      - id: pick-country   
-        run: echo "country=Israel" >> $GITHUB_OUTPUT
+        run: echo "city-name=Tel Aviv" >> $GITHUB_OUTPUT | echo "country=Israel" >> $GITHUB_OUTPUT
 
   job-b:
     needs: job-a
