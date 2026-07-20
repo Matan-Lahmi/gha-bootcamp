@@ -21,10 +21,10 @@ jobs:
       full-greeting: ${{ steps.info.outputs.full-greeting}}
     steps:
       - id: info
-        run: echo "${{ needs.job-a.outputs.greeting}} World" >> $GITHUB_OUTPUT
+        run: echo "full-greeting=${{ needs.job-a.outputs.greeting}} World" >> $GITHUB_OUTPUT
 
   job-c:
     needs: job-b
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ needs.job-b.outputs.full-greeting}}
+      - run: echo "${{ needs.job-b.outputs.full-greeting}}"
