@@ -1,19 +1,19 @@
-name: task3
+name: task5 
 
 on:
   push:
     branches:
-      - dev 
+      - main 
 
 jobs:
   job-a:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        env: ["dev","prod","staging"]
     env:
-      DB_USER: "admin"
-      DB_PASS: "123"
+      APP_NAME: "myapp"
     steps:
-      - name: db login info
-        run: echo "The DB pass is ${{ env.DB_PASS }} and the user ${{ env.DB_USER }}"
-      - name: prof the env in second steps
-        run: echo "${{ env.DB_PASS}} ${{ env.DB_USER}}"
+      - run: echo "Deploying ${{ enn.APP_NAME }} to ${{ matrix.env}}"
+      - if: ${{ martix.env }} == 'prod'
+        run: echo "Production deploying - extra caution"
