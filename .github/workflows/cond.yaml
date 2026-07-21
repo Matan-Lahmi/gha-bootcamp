@@ -1,3 +1,5 @@
+name: task1
+
 on:
   push:
     branches:
@@ -6,12 +8,9 @@ on:
 jobs:
   job-a:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        env: ["dev","prod","staging"]
-    env:
-      APP_NAME: "myapp"
     steps:
-      - run: echo "Deploying ${{ env.APP_NAME }} to ${{ matrix.env}}"
-      - if: matrix.env  == 'prod'
-        run: echo "Production deploying - extra caution"
+      - uses: actions/upload-artifact@4
+        with: 
+          name: myfile.txt
+          path: /tmp
+      - run: echo "Hello > myfile.txt"
