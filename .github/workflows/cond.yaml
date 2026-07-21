@@ -13,5 +13,5 @@ jobs:
         with: 
           name: myfile
           path: myfile.txt
-      - run: echo "Hello > myfile"
+      - run: echo "Hello" > myfile
 
