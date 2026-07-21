@@ -9,9 +9,14 @@ jobs:
   job-a:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Hello" > myfile.txt
+      - run: echo "This Hello is from job-a" > myfile.txt
       - uses: actions/upload-artifact@v4
         with: 
           name: myfile
           path: myfile.txt
 
+  job-b:
+    needs: job-a
+    runs-on: ubuntu-latest
+    steps:
+      - run: cat myfile.txt
