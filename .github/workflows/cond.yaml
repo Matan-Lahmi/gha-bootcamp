@@ -9,7 +9,10 @@ jobs:
   job-a:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-python@v5
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
       - run: python --version
-
+      - name: create a python script
+        run: echo "print('Hello from python script')" > script.py
+      - name: Run thr script
+        run: python script.py
