@@ -2,11 +2,13 @@ name: task1
 
 on:
   push:
-    tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
+    branches:
+      - main
 
 jobs:
   job-a:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "this build is for version :${{ github.ref_name }}"
+      - uses: actions/checkout@v4
+      - run: docker builed -t myimage:${{ github.sha }}
+      - run: docker images
