@@ -3,14 +3,14 @@ name: task3
 on:
   push:
     branches:
-      - main 
+      - dev 
 
 jobs:
   job-a:
     if: github.event-name == 'push' && github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
     env:
-      DB_USER: "adminnn"
+      DB_USER: "admin"
       DB_PASS: "123"
     steps:
       - name: db login info
