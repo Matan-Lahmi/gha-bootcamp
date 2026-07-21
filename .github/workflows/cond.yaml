@@ -14,4 +14,4 @@ jobs:
           name: myfile
           path: myfile.txt
       - run: echo "Hello > myfile"
-      - run: cat myfile
+
