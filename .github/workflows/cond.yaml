@@ -19,4 +19,4 @@ jobs:
     needs: job-a
     runs-on: ubuntu-latest
     steps:
-      - run: cat "myfile.txt"
+      - run: cat myfile
