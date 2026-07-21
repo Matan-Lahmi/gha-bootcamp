@@ -12,5 +12,5 @@ jobs:
       - uses: actions/upload-artifact@v4
         with: 
           name: myfile.txt
-          path: /myfiles/txt-file
+          path: myfiles/txt-file
       - run: echo "Hello > myfile.txt"
