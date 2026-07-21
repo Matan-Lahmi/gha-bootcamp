@@ -9,4 +9,4 @@ jobs:
   job-a:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "this build is for version ${{ github.ref_name }}
+      - run: echo "this build is for version :${{ github.ref_name }}
