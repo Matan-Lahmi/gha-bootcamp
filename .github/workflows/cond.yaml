@@ -13,5 +13,5 @@ jobs:
       APP_NAME: "myapp"
     steps:
       - run: echo "Deploying ${{ env.APP_NAME }} to ${{ matrix.env}}"
-      - if: ${{ martix.env }} == 'prod'
+      - if:  martix.env == 'prod'
         run: echo "Production deploying - extra caution"
