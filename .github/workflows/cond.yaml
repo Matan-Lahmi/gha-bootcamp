@@ -1,4 +1,4 @@
-name: task 4
+name: task1
 
 on:
   push:
@@ -8,17 +8,5 @@ on:
 jobs:
   job-a:
     runs-on: ubuntu-latest
-    outputs:
-      image-id: ${{ steps.build.outputs.id }}
     steps:
-      - uses: actions/checkout@v4
-      - id: build
-        run: |
-          docker build -t test-image .
-          echo "id=$(docker images -q test-image)" >> $GITHUB_OUTPUT
-
-  job-b:
-    needs: job-a
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "The image ID from job-a is ${{ needs.job-a.outputs.image-id }}"
+      - run: echo "the secret is ${{ secret.MY_SECRET }}"
