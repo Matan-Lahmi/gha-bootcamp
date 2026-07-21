@@ -10,7 +10,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@4v
+      - uses: actions/checkout@v4
       - run: echo "Using this secret ${{ secrets.MY_SECRET }}"
       - run: docker build -t myimage:${{ github.sha }} .
       - run: docker images
