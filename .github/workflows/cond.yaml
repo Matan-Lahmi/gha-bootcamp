@@ -10,7 +10,7 @@ jobs:
     if: github.event-name == 'push' && github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
     env:
-      DB_USER: "adminn"
+      DB_USER: "adminnn"
       DB_PASS: "123"
     steps:
       - name: db login info
