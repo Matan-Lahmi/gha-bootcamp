@@ -5,15 +5,16 @@ on:
     inputs:
       environment:
         description: 'the environment to deploy'
+        type: choice
         required: true
         default: 'dev'
-      version:
-        description: 'the version you whant to deploy'
-        required: true
-        default: '1.0.0'
+        options:
+          - dev
+          - staging
+          - prod
 
 jobs:
   job-a:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Deploying version ${{ github.event.inputs.version }} to ${{ github.event.inputs.environment }}"
+      - run: echo "Deploying to ${{ github.event.inputs.environment }}"
