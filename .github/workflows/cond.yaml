@@ -1,23 +1,19 @@
-name: task3
+name: task1
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'the environment to deploy'
+        required: true
+        default: 'dev'
+      version:
+        description: 'the version you whant to deploy'
+        required: true
+        default: '1.0.0'
 
 jobs:
   job-a:
-    strategy:
-      matrix:
-        env: ["prod","dev","staging"]
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Deploying to ${{ matrix.env}}"
-
-  job-b:
-    needs: job-a
-    if: success()
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "All environments deployed successfully"
-
+      - run: echo "Deploying version ${{ github.event.input.version}} to ${{ github.event.input.environment }}"
