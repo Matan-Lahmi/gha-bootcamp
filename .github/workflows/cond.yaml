@@ -1,4 +1,4 @@
-name: task3
+name: task 4
 
 on:
   push:
@@ -10,9 +10,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-      - run: python --version
-      - name: create a python script
-        run: echo "print('Hello from python script')" > script.py
-      - name: Run thr script
-        run: python script.py
+      - run: docker build -t test-image .
+      - run: docker run test-image
