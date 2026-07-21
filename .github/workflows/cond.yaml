@@ -8,7 +8,17 @@ on:
 jobs:
   job-a:
     runs-on: ubuntu-latest
+    outputs:
+      image-id: ${{ steps.build.outputd.id }}
     steps:
       - uses: actions/checkout@v4
-      - run: docker build -t test-image .
-      - run: docker run test-image
+      - id: build
+        run: |
+          docker build -t test-image
+          echo "id=(docker images -q test-image)" >> $GITHUB_OUTPUT
+
+  job-b:
+    needs: job-a
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "The image ID from job-a is :${{ needs.job-a.outputs.image-id }}"
