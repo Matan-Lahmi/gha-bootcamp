@@ -7,7 +7,7 @@ on:
 
 jobs:
   job-a:
-    if: github.ref == 'ref/heads/main'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@4v
