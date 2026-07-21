@@ -9,7 +9,7 @@ jobs:
   job-a:
     runs-on: ubuntu-latest
     outputs:
-      image-id: ${{ steps.build.outputd.id }}
+      image-id: ${{ steps.build.outputs.id }}
     steps:
       - uses: actions/checkout@v4
       - id: build
