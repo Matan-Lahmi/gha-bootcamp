@@ -9,9 +9,9 @@ jobs:
   job-a:
     runs-on: ubuntu-latest
     steps:
+      - run: echo "Hello" > myfile.txt
       - uses: actions/upload-artifact@v4
         with: 
           name: myfile
           path: myfile.txt
-      - run: echo "Hello" > myfile
 
