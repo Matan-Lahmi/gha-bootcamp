@@ -7,7 +7,7 @@ on:
 
 jobs:
   job-a:
-    if: github.event-name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     env:
       DB_USER: "adminn"
