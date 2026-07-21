@@ -19,4 +19,5 @@ jobs:
     needs: job-a
     runs-on: ubuntu-latest
     steps:
-      - run: cat myfile
+      - uses: actions/upload-artifact@v4
+      - run: cat myfile.txt
