@@ -1,20 +1,18 @@
-name: task1
+name: task3
 
 on:
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: 'the environment to deploy'
-        type: choice
-        required: true
-        default: 'dev'
-        options:
-          - dev
-          - staging
-          - prod
+  push:
+    branches:
+      - main 
 
 jobs:
   job-a:
     runs-on: ubuntu-latest
+    env:
+      DB_USER: "admin"
+      DB_PASS: "123"
     steps:
-      - run: echo "Deploying to ${{ github.event.inputs.environment }}"
+      - name: db login info
+        run: echo "The DB pass is ${{ env.DB_PASS }} and the user ${{ env.DB_USER }}"
+      - name: prof the env in second steps
+        run: echo "${{ env.DB_PASS}} ${{ env.DB_USER}}"
