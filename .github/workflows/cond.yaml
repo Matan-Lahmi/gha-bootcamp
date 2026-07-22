@@ -15,13 +15,13 @@ jobs:
       - run: echo "This environment is ${{ matrix.env }} > file-${{ matrix.env}}.txt"
       - uses: actions/upload-artifact@v4
         with:
-          name: my-files
-          path: mydir
+          name: my-files-${{ matrix.env }}
+          path: .
   job-b:
     needs: job-a
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
         with:
-          name: my-files
+          name: my-files-*
       - run: ls && cat *
