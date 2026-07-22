@@ -16,12 +16,12 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: my-files-${{ matrix.env }}
-          path: mydir
+          path: file-${{ matrix.env }}.txt
   job-b:
     needs: job-a
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
         with:
-          name: mydir
+          name: my-files-${{ matrix.env }}
       - run: ls && cat *
