@@ -1,17 +1,25 @@
-name: task1 
+name: task3 
 
 on:
-  pull_request:
   push:
-    paths:
-      - values/**
+    branches:
+      - main 
 
 jobs:
   job-a:
     runs-on: ubuntu-latest
     steps:
-      - if: github.event_name == 'pull_request' 
-        run: echo "The triggered in ${{ github.event_name }}"
-      - if: github.event_name == 'push'
-        run: echo "The triggered is ${{ github.event_name}} in values/** path"
-
+      - run: exit 1
+  job-b:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "job b"
+  job-c:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "job c"
+  job-d:
+    needs: [job-a, job-b, job-c]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "job d" 
