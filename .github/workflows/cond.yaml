@@ -9,17 +9,16 @@ jobs:
   job-a:
     runs-on: ubuntu-latest
     steps:
-      - run: exit 1
+      - run: mkdir mydir && echo "a" > mydir/a.txt && echo "b" > mydir/b.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: my-files
+          path: mydir
   job-b:
+    needs: job-a
     runs-on: ubuntu-latest
     steps:
-      - run: echo "job b"
-  job-c:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "job c"
-  job-d:
-    needs: [job-a, job-b, job-c]
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "job d" 
+      - uses: actions/download-artifact@v4
+        with:
+          name: my-files
+      - run: cat a.txt b.txt
