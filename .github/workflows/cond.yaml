@@ -23,5 +23,6 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4
         with:
-          name: my-files-*
+          pattern: my-files-*
+          merge-multiple: true
       - run: ls && cat *
