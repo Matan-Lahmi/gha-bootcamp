@@ -1,27 +1,13 @@
-name: task5
+name: task1 
 
-on:
+on: 
   push:
     branches:
-      - main 
+      - main
 
 jobs:
   job-a:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        env: ["dev","prod","staging"]
     steps:
-      - run: echo "This environment is ${{ matrix.env }}" > file-${{ matrix.env}}.txt
-      - uses: actions/upload-artifact@v4
-        with:
-          name: my-files-${{ matrix.env }}
-          path: file-${{ matrix.env }}.txt
-  job-b:
-    needs: job-a
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: my-files-*
-      - run: ls && cat *
+      - run: echo "VAR=hello" >> $GITHUB_ENV
+      - run: echo "The value is ${{ env.VAR }}"
