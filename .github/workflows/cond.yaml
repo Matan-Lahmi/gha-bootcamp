@@ -13,4 +13,7 @@ jobs:
       - working-directory: myapp
         run: echo "123456" > file.txt
       - working-directory: myapp
-        run: cat *
+        run: cat file.txt $$ pwd
+      - run: pwd
+      - run: cat file.txt
+
