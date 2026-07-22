@@ -2,10 +2,16 @@ name: task1
 
 on:
   pull_request:
+  push:
+    paths:
+      - values/**
 
 jobs:
   job-a:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "The triggered in ${{ github.event_name }}"
+      - if: github.event_name == 'pull_request' 
+        run: echo "The triggered in ${{ github.event_name }}"
+      - if: github.event_name == 'push'
+        run: echo "The triggered is ${{ github.event_name}} in values/** path"
 
