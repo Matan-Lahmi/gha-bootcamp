@@ -1,4 +1,4 @@
-name: task3 
+name: task5
 
 on:
   push:
@@ -8,8 +8,11 @@ on:
 jobs:
   job-a:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        env: ["dev","prod","staging"]
     steps:
-      - run: mkdir mydir && echo "a" > mydir/a.txt && echo "b" > mydir/b.txt
+      - run: echo "This environment is ${{ matrix.env }} > file-${{ matrix.env}}.txt"
       - uses: actions/upload-artifact@v4
         with:
           name: my-files
@@ -21,4 +24,4 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: my-files
-      - run: cat a.txt b.txt
+      - run: cat *.txt
