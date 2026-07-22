@@ -23,5 +23,5 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4
         with:
-          name: my-files-${{ matrix.env }}
+          name: my-files-*
       - run: ls && cat *
