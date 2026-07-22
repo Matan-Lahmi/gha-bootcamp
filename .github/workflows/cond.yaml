@@ -12,17 +12,16 @@ jobs:
       matrix:
         env: ["dev","prod","staging"]
     steps:
-      - run: echo "This environment is ${{ matrix.env }} > file-${{ matrix.env}}.txt"
+      - run: echo "This environment is ${{ matrix.env }}" > file-${{ matrix.env}}.txt
       - uses: actions/upload-artifact@v4
         with:
           name: my-files-${{ matrix.env }}
-          path: .
+          path: mydir
   job-b:
     needs: job-a
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
         with:
-          pattern: my-files-*
-          merge-multiple: true
+          name: mydir
       - run: ls && cat *
