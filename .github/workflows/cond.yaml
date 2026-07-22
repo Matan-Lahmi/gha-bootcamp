@@ -1,11 +1,10 @@
 name: task1 
 
 on:
-  pull_request
+  pull_request:
 
 jobs:
   job-a:
-    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - run: echo "The triggered in ${{ github.event_name }}"
