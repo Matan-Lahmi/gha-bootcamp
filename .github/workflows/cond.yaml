@@ -9,5 +9,8 @@ jobs:
   job-a:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "VAR=hello" >> $GITHUB_ENV
-      - run: echo "The value is ${{ env.VAR }}"
+      - run: mkdir myapp
+      - working-directory: myapp
+        run: echo "123456" > file.txt
+      - working-directory: myapp
+        run: cat *
