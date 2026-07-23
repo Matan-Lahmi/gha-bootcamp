@@ -14,5 +14,9 @@ jobs:
     steps:
       - run: echo "${{ matrix.env }}"
 
-
+  job-b:
+    if: matrix.env == 'prod'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This is prod environment"
   
