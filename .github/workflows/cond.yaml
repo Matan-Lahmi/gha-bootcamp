@@ -15,11 +15,12 @@ jobs:
         with:
           context: .
           push: false
+          load: true
           tags: |
             myimage:${{ github.sha }}
             myimage:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
-      - run: docker run myimage:${{ github.sha }}
+      - run: docker run myimage:latest
 
 
