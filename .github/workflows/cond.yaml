@@ -10,5 +10,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "my-name=Matan" >> $GITHUB_ENV
-      - run: echo "my name is $GITHUB_ENV"
+      - run: echo "my name is $my-name"
 
