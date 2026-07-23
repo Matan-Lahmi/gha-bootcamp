@@ -1,15 +1,23 @@
 name: task1
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      env:
+        type: choice
+        options:
+          - dev
+          - staging
+          - prod
+        description: 'were to deploy?'
+        required: true
+        
+        
 
 jobs:
   job-a:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "my_name=Matan" >> $GITHUB_ENV
-      - run: echo "my name is ${{ env.my_name }}"
+      - run: echo "${{ github.event.inputs.env}}"
 
 
