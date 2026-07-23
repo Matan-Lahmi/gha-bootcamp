@@ -9,18 +9,19 @@ jobs:
   job-a:
     runs-on: ubuntu-latest
     steps:
-      - run: exit 1
-
+      - run: echo "Hello from job-a" > job-a.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: job-a
+          path: job-a.txt
+    
   job-b:
     needs: job-a
-    if: failure()
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Job a is failed!"
-  
-  job-c:
-    needs: job-a
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "job a pass"
+      - uses: actions/download-artifact@v4
+        with:
+          name: job-a
+      - run: cat job-a.txt
+
   
