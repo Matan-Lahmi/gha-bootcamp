@@ -20,6 +20,6 @@ jobs:
             myimage:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
-      - run: docker run myimage:latest
+      - run: docker run myimage:${{ github.sha }}
 
 
