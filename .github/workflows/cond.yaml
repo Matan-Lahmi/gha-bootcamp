@@ -7,21 +7,17 @@ on:
 
 jobs:
   job-a:
+    strategy:
+      matrix:
+        env: ["prod","dev","staging"]
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Hello from job-a" > job-a.txt
-      - uses: actions/upload-artifact@v4
-        with:
-          name: job-a
-          path: job-a.txt
-    
+      - run: echo "${{ matrix.env }}"
+
   job-b:
     needs: job-a
+    if: matrix.env == 'prod'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: job-a
-      - run: cat job-a.txt
-
+      - run: echo "This is prod environment"
   
