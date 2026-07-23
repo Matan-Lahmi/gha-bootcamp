@@ -10,7 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: docker build -t myimage:${{ github.sha}} .
-      - run: docker run myimage:${{ github.sha }}
-      - run: echo "${{ secrets.MY_SECRET }}"
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          tags: |
+            myimage:${{ github.sha }}
+            myimage:latest
+
 
