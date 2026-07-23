@@ -9,7 +9,7 @@ jobs:
   job-a:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "MY_DYNAMIC_VAR=HelloFromStep1" >> $GITHUB_ENV
-      - run: echo "The value is $MY_DYNAMIC_VAR"
+      - run: echo "my_name=Matan" >> $GITHUB_ENV
+      - run: echo "my name is $my_name"
 
 
