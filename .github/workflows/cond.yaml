@@ -10,6 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: docker bulid -t myimage:${{ github.sha}} .
+      - run: docker build -t myimage:${{ github.sha}} .
       - run: echo "${{ secrets.MY_SECRET }}"
 
