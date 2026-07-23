@@ -18,5 +18,7 @@ jobs:
           tags: |
             myimage:${{ github.sha }}
             myimage:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
 
