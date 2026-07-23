@@ -11,5 +11,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: docker bulid -t myimage:${{ github.sha}} .
-      - run: echo "${{ secret.MY_SECRET }}"
+      - run: echo "${{ secrets.MY_SECRET }}"
 
