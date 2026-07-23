@@ -1,6 +1,6 @@
-name: task1 
+name: task1
 
-on: 
+on:
   push:
     branches:
       - main
@@ -8,12 +8,15 @@ on:
 jobs:
   job-a:
     runs-on: ubuntu-latest
+    outputs:
+      my-name: ${{ steps.info.outputs.name }}
     steps:
-      - run: mkdir myapp
-      - working-directory: myapp
-        run: echo "123456" > file.txt
-      - working-directory: myapp
-        run: cat file.txt &&  pwd
-      - run: pwd
-      - run: cat file.txt
+      - id: info 
+        run: echo "name=matan" >> $GITHUB_OUTPUT
+  
+  job-b:
+    needs: job-a
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "My name is ${{ needs.job-a.outputs.my-name }}"
 
