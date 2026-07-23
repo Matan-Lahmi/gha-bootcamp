@@ -10,6 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "my_name=Matan" >> $GITHUB_ENV
-      - run: echo "my name is $my_name"
+      - run: echo "my name is ${{ env.my_name }}"
 
 
