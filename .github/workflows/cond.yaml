@@ -8,15 +8,19 @@ on:
 jobs:
   job-a:
     runs-on: ubuntu-latest
-    outputs:
-      my-name: ${{ steps.info.outputs.name }}
     steps:
-      - id: info 
-        run: echo "name=matan" >> $GITHUB_OUTPUT
-  
+      - run: exit 1
+
   job-b:
+    needs: job-a
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Job a is failed!"
+  
+  job-c:
     needs: job-a
     runs-on: ubuntu-latest
     steps:
-      - run: echo "My name is ${{ needs.job-a.outputs.my-name }}"
-
+      - run: echo "job a pass"
+  
