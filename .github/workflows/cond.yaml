@@ -11,5 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: docker build -t myimage:${{ github.sha}} .
+      - run: docker run myimage:${{ github.sha }}
       - run: echo "${{ secrets.MY_SECRET }}"
 
