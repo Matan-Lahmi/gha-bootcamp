@@ -7,12 +7,9 @@ on:
 
 jobs:
   job-a:
-    strategy:
-      matrix:
-        env: ["prod","dev","staging"]
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{ matrix.env }}"
-      - if: matrix.env == 'prod'
-        run: echo "This is prod environment"
+      - uses: actions/checkout@v4
+      - run: docker bulid -t myimage:${{ github.sha}} .
+      - run: echo "${{ secret.MY_SECRET }}"
 
