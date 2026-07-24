@@ -17,7 +17,7 @@ jobs:
 
   job-b:
     needs: job-a
-    if: ${{ matrix.env == 'prod' }} && ${{ matrix.region == 'eu' }}
+    if: ${{ matrix.env == 'prod' &&  matrix.region == 'eu' }}
     runs-on: ubuntu-latest
     steps:
       - run: echo "Deploying to prod/eu"
