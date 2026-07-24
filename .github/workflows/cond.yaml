@@ -9,9 +9,9 @@ jobs:
   job-a:
     runs-on: ubuntu-latest
     steps:
-      - continue-on-error: true
-        run: exit 1
-      - run: echo "The first step in failed!"
+      - timeout-minutes: 1
+        run: sleep 90
+        
 
 
 
