@@ -27,8 +27,8 @@ jobs:
         with: 
           name: my_artifact
       - run: |
-          cat /mydir/file1.txt   
-          cat /mydir/file2.txt      
+          cat mydir/file1.txt   
+          cat mydir/file2.txt      
 
 
 
