@@ -14,7 +14,7 @@ jobs:
         run: |
           echo "Hello from file 1" > file1.txt
           echo "Hello from file 2" > file2.txt
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@v4
         with:
           name: my_artifact
           path: mydir
@@ -23,11 +23,11 @@ jobs:
     needs: job-a
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v8
+      - uses: actions/download-artifact@v4
         with: 
           name: my_artifact
       - working-directory: mydir
-        run: ls     
+        run: ls && pwd
 
 
 
