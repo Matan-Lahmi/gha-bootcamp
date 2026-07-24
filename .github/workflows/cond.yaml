@@ -26,9 +26,8 @@ jobs:
       - uses: actions/download-artifact@v8
         with: 
           name: my_artifact
-      - run: |
-          cat mydir/file1.txt   
-          cat mydir/file2.txt      
+      - working-directory: mydir
+        run: cat file1.txt && cat file2.txt      
 
 
 
