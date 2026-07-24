@@ -9,23 +9,22 @@ jobs:
   job-a:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Hello from job a"
-      - run: exit 1
-  
-  job-b:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Hello from job b"
-  
-  job-c:
-    runs-on: ubuntu-latest 
-    steps:
-      - run: echo "Hello from job c"
-  
-  job-d:
-    needs: [job-a, job-b, job-c]
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Hello from job d"
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set ip Docker Buildx
+        uses: docker/setup-buildx-action@v4
+      - name: Build image
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          push: false
+          load: true
+          tags: |
+           user/myimage:${{ github.sha }}
+           user/myimage:latest
+          cache-from: type=gha
+          cache-to: type-ghx,mode=max
+      - run:  docker image ls 
+
 
 
