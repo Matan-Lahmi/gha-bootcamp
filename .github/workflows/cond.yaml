@@ -9,22 +9,23 @@ jobs:
   job-a:
     runs-on: ubuntu-latest
     steps:
-      - run: mkdir mydir
-      - working-directory: mydir
-        run: echo "Hello from file 1" > file1.txt && echo "Hello from file 2" > file2.txt
-      - uses: actions/upload-artifact@v4
-        with:
-          name: my_artifact
-          path: mydir
-
+      - run: echo "Hello from job a"
+      - run: exit 1
+  
   job-b:
-    needs: job-a
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v4
-        with: 
-          name: my_artifact
-      - run: cat *
-
+      - run: echo "Hello from job b"
+  
+  job-c:
+    runs-on: ubuntu-latest 
+    steps:
+      - run: echo "Hello from job c"
+  
+  job-d:
+    needs: [job-a, job-b, job-c]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello from job d"
 
 
