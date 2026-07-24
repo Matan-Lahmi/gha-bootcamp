@@ -10,34 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-      - name: Set ip Docker Buildx
-        uses: docker/setup-buildx-action@v4
-      - name: Build image
-        uses: docker/build-push-action@v7
+        uses: actions/checkout@v6
+      - name: Login to Docker Hub
+        uses: docker/login-action@v4
         with:
-          context: .
-          push: false
-          load: true
-          tags: |
-           user/myimage:${{ github.sha }}
-           user/myimage:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-      - run:  docker save -o myimage-latest.tar user/myimage:latest
-      - uses: actions/upload-artifact@v7
-        with:
-          name: myimage
-          path: myimage-latest.tar
-  
-  job-b:
-    needs: job-a
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v8
-        with:
-          name: myimage
-      - run: docker load -i myimage-latest.tar
-      - run: docker run user/myimage:latest
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
 
