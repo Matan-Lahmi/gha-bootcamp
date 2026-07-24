@@ -23,7 +23,7 @@ jobs:
            user/myimage:${{ github.sha }}
            user/myimage:latest
           cache-from: type=gha
-          cache-to: type-ghx,mode=max
+          cache-to: type=ghx,mode=max
       - run:  docker image ls 
 
 
