@@ -9,9 +9,9 @@ jobs:
   job-a:
     runs-on: ubuntu-latest
     steps:
-      - run: exit 1
       - continue-on-error: true
-        run: echo "The first step in failed!"
+        run: exit 1
+      - run: echo "The first step in failed!"
 
 
 
