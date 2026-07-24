@@ -1,23 +1,33 @@
 name: task1
 
 on:
-  workflow_dispatch:
-    inputs:
-      env:
-        type: choice
-        options:
-          - dev
-          - staging
-          - prod
-        description: 'were to deploy?'
-        required: true
-        
-        
-
+  push:
+    branches:
+      - main
+    
 jobs:
   job-a:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{ github.event.inputs.env}}"
+      - run: mkdir mydir
+      - working-directory: mydir
+        run: |
+          echo "Hello from file 1" > file1.txt
+          echo "Hello from file 2" > file2.txt
+      - uses: actions/upload-artifact@v7
+        with:
+          name: my_artifact
+          path: mydir
+
+  job-b:
+    needs: job-a
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v8
+        with: 
+          name: my_artifact
+      - run: cat * /mydir  
+      
+
 
 
