@@ -8,10 +8,18 @@ on:
 jobs:
   job-a:
     runs-on: ubuntu-latest
+    timeout-minutes: 3
+    strategy:
+      fail-fast: true
+      matrix:
+        env: ["dev","prod"]
+        region: ["us","eu"]
     steps:
-      - timeout-minutes: 1
-        run: sleep 90
-        
+      - run: echo "Deploying to ${{ matrix.env }} in ${{ matrix.region }}"
+      - if: ${{ matrix.env == 'prod' && matrix.region == 'eu' }}
+        run: echo "Deploying in prod in region eu"
+      
+
 
 
 
