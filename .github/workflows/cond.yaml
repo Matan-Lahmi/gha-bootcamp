@@ -26,8 +26,9 @@ jobs:
       - uses: actions/download-artifact@v8
         with: 
           name: my_artifact
-      - run: cat * /mydir  
-      
+      - run: |
+          cat /mydir/file1.txt   
+          cat /mydir/file2.txt      
 
 
 
