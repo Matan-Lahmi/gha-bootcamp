@@ -8,17 +8,26 @@ on:
 jobs:
   job-a:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
-    strategy:
-      fail-fast: true
-      matrix:
-        env: ["dev","prod"]
-        region: ["us","eu"]
     steps:
-      - run: echo "Deploying to ${{ matrix.env }} in ${{ matrix.region }}"
-      - if: ${{ matrix.env == 'prod' && matrix.region == 'eu' }}
-        run: echo "Deploying in prod in region eu"
-      
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Login to Docker Hub
+        uses: docker/login-action@v4
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secters.DOCKERHUB_TOKEN }}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+      - name: Build and push
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/myapp:${{ github.sha}}
+            ${{ secrets.DOCKERHUB_USERNAME }}/myapp:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
 
 
