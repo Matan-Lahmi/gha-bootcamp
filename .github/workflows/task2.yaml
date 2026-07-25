@@ -17,7 +17,7 @@ jobs:
           path: gitops
 
       - working-directory: gitops/values/myapp
-        run: echo "replicas: 5" >> values.yaml
+        run: echo "replicas:5" >> values.yaml
 
       - name: commit and push
         working-directory: gitops
