@@ -1,16 +1,19 @@
-name: task2
+name: Concurrency Test
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true 
 
 jobs:
-  job-a:
+  test-job:
     runs-on: ubuntu-latest
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-      cancel-in-progress: true
     steps:
-      - run: sleep 60
-
+      - name: Simulate work
+        run: |
+          echo "Starting long task..."
+          sleep 60
+          echo "Finished task!"
