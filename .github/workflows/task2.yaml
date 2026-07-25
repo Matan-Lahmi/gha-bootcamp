@@ -20,3 +20,4 @@ jobs:
         run: |
           git add log.txt
           git commit -m "Test commit"
+          git push
