@@ -1,19 +1,29 @@
-name: Concurrency Test
+name: task2
 
 on:
   push:
-    branches: [ main ]
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true 
+    branches:
+      - main
 
 jobs:
-  test-job:
+  job-a:
     runs-on: ubuntu-latest
     steps:
-      - name: Simulate work
+      - name: Checkout target repo
+        uses: actions/checkout@v4
+        with:
+          repository: Matan-Lahmi/my-gitops-repo
+          token: ${{ secrets.PAT_TOKEN }}
+          path: gitops
+
+      - working-directory: gitops/values/myapp
+        run: echo "replicas: 5" >> values.yaml
+
+      - name: commit and push
+        working-directory: gitops
         run: |
-          echo "Starting long task..."
-          sleep 60
-          echo "Finished task!"
+          git config user.name "Github Action Bot"
+          git config user.email "actions@github.com"
+          git add /values/myapp/values.yaml
+          git commit -m "Update replicas [skip ci]"
+          git push  
