@@ -1,0 +1,22 @@
+name: task2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  job-a:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout
+      - run: echo "update $(date)" >> log.txt
+      - name: git config
+        run: |
+          git config user.name "Github Action Bot"
+          git config user.email "actions@github.com"
+      - name: Commit local
+        run: |
+          git add log.txt
+          git commit -m "Test commit"
