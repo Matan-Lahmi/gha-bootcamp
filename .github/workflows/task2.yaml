@@ -13,10 +13,21 @@ jobs:
       - name: Install yamllint 
         run: sudo apt-get update && sudo apt-get install -y yamllint
       - name: run yamllint
-        run: yamllint apps/argocd-app.yaml
+        run: yamllint apps/argocd-app.yaml apps/my-app.yaml
       - name: Install kubeconform
         run: |
             curl -L https://github.com/yannh/kubeconform/releases/latest/download/kubeconform-linux-amd64.tar.gz | tar xz
             sudo mv kubeconform /usr/local/bin
       - name: kubeconform Cheack
-        run: kubeconform -strict -summary -ignore-missing-schemas apps/argocd-app.yaml 
+        run: |
+         kubeconform -strict -summary -ignore-missing-schemas apps/argocd-app.yaml 
+         kubeconform -strict -summary -ignore-missing-schemas apps/my-app.yaml
+      - name: Security scan 
+        uses: bridgecrewio/checkov-action@v12
+        with:
+          directory: apps/
+          file: my-app.yaml
+          framework: kubernetes
+
+
+
