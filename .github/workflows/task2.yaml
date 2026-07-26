@@ -26,5 +26,5 @@ jobs:
           git config user.name "Github Action Bot"
           git config user.email "actions@github.com"
           git add values/myapp/values.yaml
-          git commit -m "Update replicas [skip ci]"
+          git commit -m "Update replicas"
           git push  
