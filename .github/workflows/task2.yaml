@@ -1,4 +1,4 @@
-name: task2
+name: yamllint-test
 
 on:
   push:
@@ -6,25 +6,11 @@ on:
       - main
 
 jobs:
-  job-a:
+  lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout target repo
-        uses: actions/checkout@v4
-        with:
-          repository: Matan-Lahmi/my-gitops-repo
-          token: ${{ secrets.PAT_TOKEN }}
-          path: gitops
-
-      - working-directory: gitops/values/myapp
-        run: |
-           echo "replicas: 15" > values.yaml
-
-      - name: commit and push
-        working-directory: gitops
-        run: |
-          git config user.name "Github Action Bot"
-          git config user.email "actions@github.com"
-          git add values/myapp/values.yaml
-          git commit -m "Update replicas"
-          git push  
+      - uses: actions/checkout@v4 
+      - name: Install yamllint 
+        run: sudo apt-get update && sudo apt-get install -y yamllint
+      - name: run yamllint
+        run: yamllint apps/argocd-app.yaml
